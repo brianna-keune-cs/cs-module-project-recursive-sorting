@@ -4,8 +4,27 @@
 def merge(arrA, arrB):
     elements = len(arrA) + len(arrB)
     merged_arr = [0] * elements
+    a_index = 0
+    b_index = 0
+    index_count = 0
 
-    # Your code here
+    while a_index < len(arrA) and b_index < len(arrB):
+        if arrA[a_index] < arrB[b_index]:
+            merged_arr[index_count] = arrA[a_index]
+            a_index += 1
+            index_count += 1
+        else:
+            merged_arr[index_count] = arrB[b_index]
+            b_index += 1
+            index_count += 1
+    while b_index < len(arrB):
+        merged_arr[index_count] = arrB[b_index]
+        b_index += 1
+        index_count += 1
+    while a_index < len(arrA):
+        merged_arr[index_count] = arrA[a_index]
+        a_index += 1
+        index_count += 1
 
     return merged_arr
 
@@ -19,10 +38,8 @@ def merge_sort(arr):
     # split array evenly as possible
     # do this recursivly until a single element is left
     mid = len(arr) // 2
-    left = arr[0:mid]
-    right = arr[mid:]
-    arrA = merge_sort(left)
-    arrB = merge_sort(right)
+    arrA = merge_sort(arr[0:mid])
+    arrB = merge_sort(arr[mid:])
 
     # when at a single element merge
 
